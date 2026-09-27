@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лев & Татьяна — 17.07.2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#FF3D8B;
+  --orange:#FF8A00;
+  --yellow:#FFD400;
+  --mint:#00D9A5;
+  --blue:#4C4CFF;
+  --purple:#B14EFF;
+  --cream:#FFF6E9;
+  --ink:#141024;
+  --white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.font-display{font-family:'Unbounded',sans-serif}
+
+/* ---------- INTRO OVERLAY ---------- */
+#intro{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,var(--pink),var(--purple) 45%,var(--blue));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:24px;
+  transition:opacity .9s ease, visibility .9s;
+}
+#intro.hidden{opacity:0;visibility:hidden}
+#intro .env{
+  font-size:clamp(52px,14vw,96px);
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+#intro h2{
+  color:#fff;font-size:clamp(22px,5.5vw,40px);margin:18px 0 6px;letter-spacing:-.02em;
+}
+#intro p{color:rgba(255,255,255,.85);font-size:15px;margin-bottom:28px;max-width:340px}
+.open-btn{
+  font-family:'Unbounded',sans-serif;font-weight:700;
+  background:var(--yellow);color:var(--ink);
+  border:none;border-radius:100px;
+  padding:18px 40px;font-size:15px;cursor:pointer;
+  box-shadow:0 10px 0 rgba(0,0,0,.18);
+  transition:transform .15s, box-shadow .15s;
+  letter-spacing:.02em;
+}
+.open-btn:hover{transform:translateY(-3px);box-shadow:0 13px 0 rgba(0,0,0,.18)}
+.open-btn:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(0,0,0,.18)}
+
+/* ---------- FLOATING BG SHAPES ---------- */
+.blob{position:absolute;border-radius:50%;filter:blur(50px);opacity:.55;pointer-events:none;z-index:0}
+
+/* ---------- HERO ---------- */
+header{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:90px 20px 60px;overflow:hidden;
+}
+.hero-tag{
+  position:relative;z-index:2;
+  background:var(--ink);color:var(--yellow);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:700;
+  padding:9px 20px;border-radius:100px;margin-bottom:22px;
+}
+.names{
+  position:relative;z-index:2;
+  font-size:clamp(54px,15vw,150px);
+  font-weight:900;line-height:.88;letter-spacing:-.045em;
+}
+.names .n1{display:block;color:var(--pink);text-shadow:6px 6px 0 var(--yellow)}
+.names .n2{display:block;color:var(--blue);text-shadow:6px 6px 0 var(--mint)}
+.amp{
+  position:relative;z-index:2;
+  font-family:'Unbounded',sans-serif;font-weight:900;
+  font-size:clamp(28px,7vw,58px);color:var(--orange);
+  margin:6px 0;transform:rotate(-8deg);
+}
+.date-badge{
+  position:relative;z-index:2;margin-top:26px;
+  display:inline-flex;align-items:center;gap:14px;
+  background:var(--white);border:3px solid var(--ink);
+  border-radius:100px;padding:14px 30px;
+  font-family:'Unbounded',sans-serif;font-weight:800;
+  font-size:clamp(18px,4.5vw,30px);
+  box-shadow:8px 8px 0 var(--ink);
+}
+.date-badge span{color:var(--pink)}
+.hero-sub{position:relative;z-index:2;margin-top:26px;font-size:15px;font-weight:600;color:#5c5470;max-width:420px;line-height:1.6}
+
+/* ---------- MARQUEE ---------- */
+.marquee{
+  background:var(--ink);color:var(--cream);
+  padding:16px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:3;
+}
+.marquee-track{display:inline-flex;animation:scroll 28s linear infinite}
+.marquee-track span{
+  font-family:'Unbounded',sans-serif;font-weight:700;font-size:16px;
+  padding:0 26px;letter-spacing:.06em;
+}
+.marquee-track span i{color:var(--yellow);font-style:normal}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- SECTIONS ---------- */
+section{position:relative;z-index:2;padding:90px 20px;max-width:1080px;margin:0 auto}
+.sec-label{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.3em;
+  text-transform:uppercase;color:#fff;padding:8px 18px;border-radius:100px;margin-bottom:18px;
+}
+.sec-title{font-size:clamp(30px,7vw,56px);font-weight:800;line-height:1.02;letter-spacing:-.03em;margin-bottom:22px}
+.sec-text{font-size:17px;line-height:1.75;color:#4a4360;max-width:680px}
+.center{text-align:center}
+.center .sec-text{margin-left:auto;margin-right:auto}
+
+/* ---------- COUNTDOWN ---------- */
+.count-wrap{
+  background:var(--ink);border-radius:36px;padding:52px 24px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.count-wrap::before{
+  content:'';position:absolute;width:340px;height:340px;border-radius:50%;
+  background:var(--pink);filter:blur(90px);opacity:.5;top:-140px;left:-90px;
+}
+.count-wrap::after{
+  content:'';position:absolute;width:300px;height:300px;border-radius:50%;
+  background:var(--mint);filter:blur(90px);opacity:.45;bottom:-130px;right:-80px;
+}
+.count-title{position:relative;color:#fff;font-family:'Unbounded',sans-serif;font-weight:700;font-size:14px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:32px}
+.timer{position:relative;display:flex;justify-content:center;gap:clamp(8px,2.6vw,26px);flex-wrap:wrap}
+.t-unit{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  border-radius:22px;padding:18px 8px;min-width:clamp(70px,19vw,116px);
+  backdrop-filter:blur(8px);
+}
+.t-num{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(28px,7vw,50px);color:var(--yellow);line-height:1;font-variant-numeric:tabular-nums}
+.t-lab{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:10px;font-weight:700}
+
+/* ---------- TIMELINE / STORY ---------- */
+.story-grid{display:grid;gap:18px;margin-top:44px}
+.story-card{
+  background:#fff;border:3px solid var(--ink);border-radius:26px;
+  padding:26px 26px 26px 30px;position:relative;
+  box-shadow:7px 7px 0 var(--ink);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.story-card:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 var(--ink)}
+.story-card .yr{
+  display:inline-block;font-family:'Unbounded',sans-serif;font-weight:900;
+  font-size:13px;padding:6px 14px;border-radius:100px;color:#fff;margin-bottom:12px;
+}
+.story-card h3{font-size:20px;margin-bottom:8px;font-weight:700}
+.story-card p{font-size:15.5px;line-height:1.65;color:#4a4360}
+
+/* ---------- PROGRAM ---------- */
+.prog{display:grid;gap:16px;margin-top:44px}
+.prog-item{
+  display:flex;gap:20px;align-items:flex-start;
+  background:#fff;border-radius:24px;padding:24px;
+  border:3px solid var(--ink);box-shadow:7px 7px 0 var(--ink);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.prog-item:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 var(--ink)}
+.prog-time{
+  font-family:'Unbounded',sans-serif;font-weight:900;font-size:19px;
+  min-width:82px;padding-top:2px;
+}
+.prog-body h3{font-size:18px;margin-bottom:5px;font-weight:700}
+.prog-body p{font-size:14.5px;color:#5c5470;line-height:1.6}
+.prog-icon{font-size:26px;line-height:1;margin-left:auto}
+
+/* ---------- DRESSCODE ---------- */
+.palette{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:40px 0 26px}
+.swatch{
+  width:clamp(72px,17vw,108px);height:clamp(72px,17vw,108px);
+  border-radius:50%;border:3px solid var(--ink);
+  box-shadow:5px 5px 0 var(--ink);
+  transition:transform .25s ease;
+}
+.swatch:hover{transform:scale(1.12) rotate(8deg)}
+
+/* ---------- LOCATION ---------- */
+.loc-card{
+  background:var(--white);border:3px solid var(--ink);border-radius:32px;
+  overflow:hidden;box-shadow:9px 9px 0 var(--ink);margin-top:40px;
+}
+.loc-map{
+  height:230px;position:relative;
+  background:
+    repeating-linear-gradient(45deg,#FFD400 0 22px,#FF8A00 22px 44px);
+  display:flex;align-items:center;justify-content:center;
+}
+.loc-map .pin{font-size:64px;animation:bounce 1.8s ease-in-out infinite;filter:drop-shadow(0 8px 10px rgba(0,0,0,.25))}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.loc-info{padding:30px}
+.loc-info h3{font-size:24px;margin-bottom:10px}
+.loc-info p{font-size:15.5px;line-height:1.7;color:#4a4360;margin-bottom:20px}
+.btn{
+  display:inline-block;font-family:'Unbounded',sans-serif;font-weight:700;
+  font-size:13.5px;text-decoration:none;padding:15px 30px;border-radius:100px;
+  border:3px solid var(--ink);background:var(--yellow);color:var(--ink);
+  box-shadow:5px 5px 0 var(--ink);cursor:pointer;
+  transition:transform .15s, box-shadow .15s;
+}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn-pink{background:var(--pink);color:#fff}
+.btn-mint{background:var(--mint)}
+.btn-blue{background:var(--blue);color:#fff}
+
+/* ---------- DETAILS / GIFTS ---------- */
+.details-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:44px}
+.detail{
+  background:#fff;border:3px solid var(--ink);border-radius:26px;padding:28px;
+  box-shadow:7px 7px 0 var(--ink);
+  transition:transform .25s, box-shadow .25s;
+}
+.detail:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 var(--ink)}
+.detail .ico{font-size:34px;display:block;margin-bottom:14px}
+.detail h3{font-size:17px;margin-bottom:9px;font-weight:700}
+.detail p{font-size:14.8px;line-height:1.65;color:#5c5470}
+
+/* ---------- RSVP ---------- */
+.rsvp{
+  background:linear-gradient(150deg,var(--purple),var(--pink) 55%,var(--orange));
+  border-radius:40px;padding:clamp(28px,6vw,64px);position:relative;overflow:hidden;
+  box-shadow:0 24px 60px rgba(177,78,255,.32);
+}
+.rsvp::before{content:'';position:absolute;width:300px;height:300px;background:var(--yellow);border-radius:50%;filter:blur(90px);opacity:.35;top:-120px;right:-90px}
+.rsvp h2{color:#fff;font-size:clamp(28px,6.5vw,48px);font-weight:800;line-height:1.05;margin-bottom:12px;letter-spacing:-.03em;position:relative}
+.rsvp .lead{color:rgba(255,255,255,.9);font-size:16px;margin-bottom:34px;position:relative}
+form{position:relative;display:grid;gap:18px}
+.field{display:flex;flex-direction:column;gap:8px}
+label{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.9)}
+input[type=text],textarea,select{
+  font-family:'Manrope',sans-serif;font-size:16px;
+  padding:16px 18px;border-radius:18px;border:3px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.95);color:var(--ink);outline:none;
+  transition:border-color .2s, transform .2s;width:100%;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--yellow);transform:translateY(-2px)}
+textarea{resize:vertical;min-height:104px}
+.radio-row{display:flex;gap:12px;flex-wrap:wrap}
+.radio-row label{
+  display:flex;align-items:center;gap:9px;cursor:pointer;
+  background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.4);
+  border-radius:100px;padding:13px 22px;font-size:13.5px;letter-spacing:0;
+  text-transform:none;font-weight:700;color:#fff;transition:background .2s, transform .2s;
+}
+.radio-row label:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+.radio-row input{accent-color:var(--yellow);width:17px;height:17px}
+.checks{display:flex;gap:10px;flex-wrap:wrap}
+.checks label{
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.4);
+  border-radius:100px;padding:11px 20px;font-size:13.5px;letter-spacing:0;
+  text-transform:none;font-weight:700;color:#fff;transition:background .2s, transform .2s;
+}
+.checks label:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+.checks input{accent-color:var(--yellow);width:16px;height:16px}
+.submit{
+  font-family:'Unbounded',sans-serif;font-weight:800;font-size:16px;
+  background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
+  border-radius:100px;padding:20px 40px;cursor:pointer;margin-top:10px;
+  box-shadow:6px 6px 0 var(--ink);transition:transform .15s, box-shadow .15s;
+}
+.submit:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--ink)}
+.submit:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.thanks{
+  display:none;position:relative;text-align:center;color:#fff;padding:30px 10px;
+}
+.thanks.show{display:block;animation:pop .5s cubic-bezier(.2,1.4,.5,1)}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.thanks .big{font-size:56px;margin-bottom:14px}
+.thanks h3{font-size:26px;margin-bottom:10px}
+
+/* ---------- CONTACTS ---------- */
+.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:40px}
+.contact{
+  background:#fff;border:3px solid var(--ink);border-radius:26px;padding:26px;text-align:center;
+  box-shadow:7px 7px 0 var(--ink);transition:transform .25s, box-shadow .25s;
+}
+.contact:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 var(--ink)}
+.contact .ico{font-size:30px;margin-bottom:12px;display:block}
+.contact h3{font-size:15px;margin-bottom:6px;font-weight:700}
+.contact a{font-size:16px;font-weight:700;color:var(--pink);text-decoration:none;word-break:break-word}
+.contact a:hover{text-decoration:underline}
+
+/* ---------- FOOTER ---------- */
+footer{
+  background:var(--ink);color:var(--cream);text-align:center;
+  padding:70px 20px 46px;position:relative;overflow:hidden;
+}
+footer .fnames{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(30px,9vw,72px);letter-spacing:-.04em;line-height:1}
+footer .fnames .a{color:var(--pink)}
+footer .fnames .b{color:var(--mint)}
+footer .fdate{margin-top:18px;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.34em;font-size:13px;color:var(--yellow)}
+footer .fnote{margin-top:30px;font-size:13.5px;color:rgba(255,255,255,.45)}
+
+/* ---------- REVEAL ANIMATION ---------- */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .8s cubic-bezier(.2,.7,.3,1), transform .8s cubic-bezier(.2,.7,.3,1)}
+.reveal.vis{opacity:1;transform:none}
+
+/* ---------- CONFETTI ---------- */
+.confetti{position:fixed;top:-20px;width:11px;height:16px;z-index:9998;pointer-events:none;will-change:transform}
+@keyframes fall{
+  0%{transform:translateY(-10vh) rotate(0deg);opacity:1}
+  100%{transform:translateY(105vh) rotate(760deg);opacity:.9}
+}
+
+/* ---------- MUSIC BTN ---------- */
+.music-btn{
+  position:fixed;bottom:20px;right:20px;z-index:900;
+  width:56px;height:56px;border-radius:50%;border:3px solid var(--ink);
+  background:var(--mint);cursor:pointer;font-size:22px;
+  box-shadow:5px 5px 0 var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .15s, box-shadow .15s;
+}
+.music-btn:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink)}
+
+/* ---------- SCROLL PROGRESS ---------- */
+#prog-bar{position:fixed;top:0;left:0;height:5px;width:0;z-index:9997;
+  background:linear-gradient(90deg,var(--pink),var(--orange),var(--yellow),var(--mint),var(--blue),var(--purple));}
+
+@media(max-width:600px){
+  section{padding:70px 18px}
+  .prog-item{gap:14px;padding:20px}
+  .prog-time{min-width:64px;font-size:16px}
+  .music-btn{width:50px;height:50px;font-size:19px;bottom:16px;right:16px}
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<!-- ============ INTRO ============ -->
+<div id="intro">
+  <div class="env">💌</div>
+  <h2>Лев &amp; Татьяна</h2>
+  <p>Мы хотим сообщить вам кое‑что важное…</p>
+  <button class="open-btn" onclick="openInvite()">Открыть приглашение</button>
+</div>
+
+<!-- ============ HERO ============ -->
+<header>
+  <div class="blob" style="width:340px;height:340px;background:var(--pink);top:-80px;left:-110px"></div>
+  <div class="blob" style="width:300px;height:300px;background:var(--mint);bottom:-90px;right:-100px"></div>
+  <div class="blob" style="width:240px;height:240px;background:var(--yellow);top:40%;right:-70px"></div>
+
+  <div class="hero-tag" id="guestTag">Дорогие гости</div>
+
+  <h1 class="names">
+    <span class="n1">ЛЕВ</span>
+    <span class="amp">&amp;</span>
+    <span class="n2">ТАТЬЯНА</span>
+  </h1>
+
+  <div class="date-badge">
+    <span>17</span> · 07 · <span>2027</span>
+  </div>
+
+  <p class="hero-sub">Суббота. День, когда мы станем семьёй — и нам очень важно, чтобы вы были рядом.</p>
+</header>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="marquee-track" id="mq">
+    <span>17.07.2027 <i>✦</i> ЛЕВ &amp; ТАТЬЯНА <i>✦</i> СКАЗАТЬ «ДА» <i>✦</i> СУББОТА <i>✦</i> 15:00 <i>✦</i></span>
+    <span>17.07.2027 <i>✦</i> ЛЕВ &amp; ТАТЬЯНА <i>✦</i> СКАЗАТЬ «ДА» <i>✦</i> СУББОТА <i>✦</i> 15:00 <i>✦</i></span>
+  </div>
+</div>
+
+<!-- ============ COUNTDOWN ============ -->
+<section class="reveal">
+  <div class="count-wrap">
+    <div class="count-title">До нашего праздника осталось</div>
+    <div class="timer" id="timer">
+      <div class="t-unit"><div class="t-num" id="d">000</div><div class="t-lab">дней</div></div>
+      <div class="t-unit"><div class="t-num" id="h">00</div><div class="t-lab">часов</div></div>
+      <div class="t-unit"><div class="t-num" id="m">00</div><div class="t-lab">минут</div></div>
+      <div class="t-unit"><div class="t-num" id="s">00</div><div class="t-lab">секунд</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INVITATION ============ -->
+<section class="center reveal">
+  <div class="sec-label" style="background:var(--pink)">Приглашение</div>
+  <h2 class="sec-title">Мы приглашаем вас<br>разделить с нами этот день</h2>
+  <p class="sec-text">
+    Совсем скоро в нашей жизни случится самое тёплое и важное событие — мы скажем друг другу «да».
+    Этот день будет по‑настоящему счастливым, если рядом будут близкие люди. Будем рады видеть вас!
+  </p>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="reveal">
+  <div class="sec-label" style="background:var(--blue)">Наша история</div>
+  <h2 class="sec-title">Как всё начиналось</h2>
+
+  <div class="story-grid">
+    <div class="story-card">
+      <span class="yr" style="background:var(--pink)">2019</span>
+      <h3>Случайная встреча</h3>
+      <p>Обычный осенний вечер, шумная вечеринка у общих друзей — и разговор, который не хотелось заканчивать. Мы проговорили до самого утра.</p>
+    </div>
+    <div class="story-card">
+      <span class="yr" style="background:var(--orange)">2020</span>
+      <h3>Первое путешествие</h3>
+      <p>Две недели, один рюкзак на двоих и море впечатлений. Именно тогда мы поняли: вместе нам хорошо где угодно.</p>
+    </div>
+    <div class="story-card">
+      <span class="yr" style="background:var(--mint)">2022</span>
+      <h3>Наш дом</h3>
+      <p>Ключи, коробки, первый совместный ужин на полу среди распакованных вещей. Так началась наша маленькая вселенная.</p>
+    </div>
+    <div class="story-card">
+      <span class="yr" style="background:var(--purple)">2026</span>
+      <h3>Предложение</h3>
+      <p>Закат, тёплый ветер и одно очень важное «да». Лев всё подготовил, Татьяна всё поняла ещё до слов.</p>
+    </div>
+    <div class="story-card">
+      <span class="yr" style="background:var(--blue)">2027</span>
+      <h3>Свадьба</h3>
+      <p>17 июля 2027 года. День, к которому мы шли вместе — и который хотим провести с вами.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROGRAM ============ -->
+<section class="reveal">
+  <div class="sec-label" style="background:var(--orange)">Программа дня</div>
+  <h2 class="sec-title">Как пройдёт 17 июля</h2>
+
+  <div class="prog">
+    <div class="prog-item">
+      <div class="prog-time" style="color:var(--pink)">15:00</div>
+      <div class="prog-body"><h3>Сбор гостей</h3><p>Welcome‑зона, лёгкие напитки и первые фотографии. Приходите чуть заранее — будем обниматься.</p></div>
+      <div class="prog-icon">🥂</div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time" style="color:var(--blue)">16:00</div>
+      <div class="prog-body"><h3>Церемония</h3><p>Самый трогательный момент дня. Просим выключить телефоны и просто быть с нами.</p></div>
+      <div class="prog-icon">💍</div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time" style="color:var(--mint)">17:30</div>
+      <div class="prog-body"><h3>Фуршет и фотосессия</h3><p>Закуски, коктейли и много кадров на память. Не стесняйтесь — фотограф вас найдёт.</p></div>
+      <div class="prog-icon">📸</div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time" style="color:var(--purple)">19:00</div>
+      <div class="prog-body"><h3>Банкет</h3><p>Первый танец, тёплые слова, вкусный ужин и, конечно, тосты за молодых.</p></div>
+      <div class="prog-icon">🍽️</div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time" style="color:var(--orange)">22:00</div>
+      <div class="prog-body"><h3>Свадебный торт</h3><p>Сладкая кульминация вечера — и повод для ещё одной порции аплодисментов.</p></div>
+      <div class="prog-icon">🎂</div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time" style="color:var(--pink)">23:00</div>
+      <div class="prog-body"><h3>Танцы и фейерверк</h3><p>Танцпол открыт до последнего гостя. Финал вечера — огни в ночном небе.</p></div>
+      <div class="prog-icon">🎆</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:36px">
+    <button class="btn btn-blue" onclick="addToCalendar()">📅 Добавить в календарь</button>
+  </div>
+</section>
+
+<!-- ============ DRESSCODE ============ -->
+<section class="center reveal">
+  <div class="sec-label" style="background:var(--purple)">Дресс‑код</div>
+  <h2 class="sec-title">Ярко, смело, по‑вашему</h2>
+  <p class="sec-text">
+    Мы обожаем цвет и не любим скучные правила. Выбирайте наряды в этой палитре — будет красиво и на фото, и в жизни.
+    Главное — чтобы вам было удобно танцевать!
+  </p>
+
+  <div class="palette">
+    <div class="swatch" style="background:var(--pink)"></div>
+    <div class="swatch" style="background:var(--orange)"></div>
+    <div class="swatch" style="background:var(--yellow)"></div>
+    <div class="swatch" style="background:var(--mint)"></div>
+    <div class="swatch" style="background:var(--blue)"></div>
+    <div class="swatch" style="background:var(--purple)"></div>
+  </div>
+  <p class="sec-text" style="font-size:14.5px;color:#7a7391">
+    Пожалуйста, избегайте полностью белого и чёрного — оставим их для других поводов ✨
+  </p>
+</section>
+
+<!-- ============ LOCATION ============ -->
+<section class="reveal">
+  <div class="sec-label" style="background:var(--mint);color:var(--ink)">Локация</div>
+  <h2 class="sec-title">Где мы вас ждём</h2>
+
+  <div class="loc-card">
+    <div class="loc-map"><div class="pin">📍</div></div>
+    <div class="loc-info">
+      <h3>Загородный клуб «Солнечный сад»</h3>
+      <p>
+        Московская область, Одинцовский район, деревня Раздоры, 15<br>
+        Трансфер от станции метро «Молодёжная» — в 14:00 и 14:30.<br>
+        Для гостей на автомобиле — бесплатная парковка на территории.
+      </p>
+      <a class="btn btn-mint" href="https://yandex.ru/maps/?text=Раздоры" target="_blank" rel="noopener">Открыть карту →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DETAILS ============ -->
+<section class="reveal">
+  <div class="sec-label" style="background:var(--pink)">Важные детали</div>
+  <h2 class="sec-title">Что стоит знать</h2>
+
+  <div class="details-grid">
+    <div class="detail">
+      <span class="ico">🎁</span>
+      <h3>О подарках</h3>
+      <p>Лучший подарок — ваше присутствие. Но если хотите порадовать — мы будем благодарны за вклад в наше первое семейное путешествие.</p>
+    </div>
+    <div class="detail">
+      <span class="ico">👶</span>
+      <h3>Дети</h3>
+      <p>Мы будем счастливы видеть ваших малышей. Пожалуйста, сообщите об этом в анкете — организуем детскую зону и аниматора.</p>
+    </div>
+    <div class="detail">
+      <span class="ico">🥗</span>
+      <h3>Меню</h3>
+      <p>У нас есть вегетарианские и безглютеновые опции. Напишите о своих предпочтениях и аллергиях — шеф‑повар всё учтёт.</p>
+    </div>
+    <div class="detail">
+      <span class="ico">📵</span>
+      <h3>Церемония без телефонов</h3>
+      <p>Просим отложить гаджеты на время церемонии. Профессиональный фотограф снимет всё самое важное, а мы поделимся кадрами.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section class="reveal">
+  <div class="rsvp">
+    <div id="formBlock">
+      <h2>Подтвердите присутствие</h2>
+      <p class="lead">Пожалуйста, ответьте до <b>1 июня 2027 года</b> — так мы сможем всё подготовить идеально.</p>
+
+      <form id="rsvpForm" onsubmit="return submitForm(event)">
+        <div class="field">
+          <label for="name">Ваше имя и фамилия</label>
+          <input type="text" id="name" placeholder="Иван Иванов" required>
+        </div>
+
+        <div class="field">
+          <label>Вы придёте?</label>
+          <div class="radio-row">
+            <label><input type="radio" name="come" value="yes" checked> Обязательно буду!</label>
+            <label><input type="radio" name="come" value="no"> К сожалению, не смогу</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="guests">Количество гостей (включая вас)</label>
+          <select id="guests">
+            <option value="1">1 человек</option>
+            <option value="2" selected>2 человека</option>
+            <option value="3">3 человека</option>
+            <option value="4">4 человека</option>
+            <option value="5">5 и более</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Предпочтения по напиткам</label>
+          <div class="checks">
+            <label><input type="checkbox" value="Шампанское"> Шампанское</label>
+            <label><input type="checkbox" value="Вино красное"> Красное вино</label>
+            <label><input type="checkbox" value="Вино белое"> Белое вино</label>
+            <label><input type="checkbox" value="Крепкий алкоголь"> Крепкий алкоголь</label>
+            <label><input type="checkbox" value="Безалкогольные"> Безалкогольные</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="wishes">Пожелания, аллергии, нужен ли трансфер</label>
+          <textarea id="wishes" placeholder="Например: вегетарианское меню, аллергия на орехи, нужен трансфер…"></textarea>
+        </div>
+
+        <button type="submit" class="submit">Отправить ответ 💌</button>
+      </form>
+    </div>
+
+    <div class="thanks" id="thanks">
+      <div class="big">🎉</div>
+      <h3>Спасибо, что ответили!</h3>
+      <p style="color:rgba(255,255,255,.9);font-size:16px;line-height:1.7;max-width:460px;margin:0 auto">
+        Мы очень ждём встречи с вами 17 июля 2027 года.<br>До скорого!
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTS ============ -->
+<section class="reveal">
+  <div class="sec-label" style="background:var(--blue)">Контакты</div>
+  <h2 class="sec-title">Есть вопросы?</h2>
+  <p class="sec-text">Свяжитесь с нами или с нашим координатором — с радостью поможем.</p>
+
+  <div class="contacts">
+    <div class="contact">
+      <span class="ico">👰</span>
+      <h3>Татьяна</h3>
+      <a href="tel:+79000000001">+7 900 000‑00‑01</a>
+    </div>
+    <div class="contact">
+      <span class="ico">🤵</span>
+      <h3>Лев</h3>
+      <a href="tel:+79000000002">+7 900 000‑00‑02</a>
+    </div>
+    <div class="contact">
+      <span class="ico">💬</span>
+      <h3>Координатор свадьбы</h3>
+      <a href="tel:+79000000003">+7 900 000‑00‑03</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="fnames"><span class="a">Лев</span> &amp; <span class="b">Татьяна</span></div>
+  <div class="fdate">17 · 07 · 2027</div>
+  <p class="fnote">До встречи на самом ярком дне нашей жизни ✨</p>
+</footer>
+
+<button class="music-btn" id="musicBtn" title="Веселье">🎵</button>
+
+<script>
+/* ---------- INTRO ---------- */
+function openInvite(){
+  document.getElementById('intro').classList.add('hidden');
+  burstConfetti(120);
+  setTimeout(()=>document.body.style.overflow='',300);
+}
+document.body.style.overflow='hidden';
+
+/* ---------- PERSONAL GREETING ?guest=Имя ---------- */
+(function(){
+  const p = new URLSearchParams(location.search);
+  const g = p.get('guest');
+  if(g){
+    document.getElementById('guestTag').textContent = 'Дорогой(ая) ' + decodeURIComponent(g);
+    document.getElementById('name').value = decodeURIComponent(g);
+  }
+})();
+
+/* ---------- COUNTDOWN ---------- */
+const target = new Date(2027, 6, 17, 15, 0, 0).getTime(); // 17 июля 2027, 15:00
+const pad = n => String(n).padStart(2,'0');
+function tick(){
+  const now = Date.now();
+  let diff = target - now;
+  if(diff < 0) diff = 0;
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor(diff%86400000/3600000);
+  const m = Math.floor(diff%3600000/60000);
+  const s = Math.floor(diff%60000/1000);
+  document.getElementById('d').textContent = d;
+  document.getElementById('h').textContent = pad(h);
+  document.getElementById('m').textContent = pad(m);
+  document.getElementById('s').textContent = pad(s);
+}
+tick(); setInterval(tick,1000);
+
+/* ---------- SCROLL REVEAL ---------- */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- SCROLL PROGRESS ---------- */
+window.addEventListener('scroll',()=>{
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('prog-bar').style.width = (window.scrollY/h*100) + '%';
+});
+
+/* ---------- CONFETTI ---------- */
+const colors = ['#FF3D8B','#FF8A00','#FFD400','#00D9A5','#4C4CFF','#B14EFF','#ffffff'];
+function burstConfetti(count){
+  for(let i=0;i<count;i++){
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random()*100 + 'vw';
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+    const dur = 2.6 + Math.random()*2.4;
+    c.style.animation = `fall ${dur}s linear ${Math.random()*0.9}s forwards`;
+    c.style.width = (7 + Math.random()*9) + 'px';
+    c.style.height = (9 + Math.random()*12) + 'px';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), (dur+1.5)*1000);
+  }
+}
+
+/* ---------- RSVP ---------- */
+function submitForm(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const come = document.querySelector('input[name="come"]:checked').value;
+  document.getElementById('formBlock').style.display = 'none';
+  const t = document.getElementById('thanks');
+  t.classList.add('show');
+  if(come === 'yes'){
+    burstConfetti(140);
+    t.querySelector('h3').textContent = name ? name.split(' ')[0] + ', спасибо!' : 'Спасибо, что ответили!';
+  } else {
+    t.querySelector('.big').textContent = '💛';
+    t.querySelector('h3').textContent = 'Нам будет вас не хватать';
+    t.querySelector('p').innerHTML = 'Спасибо, что сообщили. Мы обязательно поднимем бокал за вас!';
+  }
+  t.scrollIntoView({behavior:'smooth', block:'center'});
+  return false;
+}
+
+/* ---------- ADD TO CALENDAR (.ics) ---------- */
+function addToCalendar(){
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wedding//Lev&Tatiana//RU','BEGIN:VEVENT',
+    'UID:wedding-lev-tatiana-2027@invite',
+    'DTSTAMP:20260101T000000Z',
+    'DTSTART:20270717T120000Z',
+    'DTEND:20270717T220000Z',
+    'SUMMARY:Свадьба Льва и Татьяны',
+    'LOCATION:кафе "Banhof" ,поселок Южный',
+    'DESCRIPTION:Сбор гостей в 15:00. Церемония в 16:00. Будем счастливы видеть вас!',
+    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Завтра свадьба Льва и Татьяны!','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'svadba-lev-tatiana-17-07-2027.ics';
+  document.body.appendChild(a); a.click(); a.remove();
+  burstConfetti(50);
+}
+
+/* ---------- MUSIC BUTTON (веселье) ---------- */
+document.getElementById('musicBtn').addEventListener('click', function(){
+  burstConfetti(70);
+  this.textContent = '💖';
+  setTimeout(()=>this.textContent = '🎵', 900);
+  // Плавная вибрация на мобильных
+  if(navigator.vibrate) navigator.vibrate(60);
+});
+
+/* ---------- Лёгкое конфетти при первом скролле до конца ---------- */
+let footerFired = false;
+window.addEventListener('scroll',()=>{
+  if(footerFired) return;
+  if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60){
+    footerFired = true;
+    burstConfetti(90);
+  }
+});
+</script>
+</body>
+</html>
